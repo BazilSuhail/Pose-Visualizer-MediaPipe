@@ -43,32 +43,39 @@ pip install -r requirements.txt
 ```
 mediapipe-pose-visualizer/
 │
-├── pose_video_overlay.py        # Draws 2D pose landmarks on video frames
-├── pose_3d_visualization.py     # Visualizes 3D skeleton with Matplotlib
+├── 2d_web_cam.py                # Draws 2D pose landmarks on webcam feed
+├── pose_detection_2d.py         # Draws 2D pose landmarks on video frames
+├── pose_detection_3d.py         # Visualizes 3D skeleton with Matplotlib
 │
 ├── requirements.txt             # Python dependencies
 └── README.md                    # Project documentation
 ```
 
 ## File Descriptions
-- **pose_video_overlay.py**  
+- **2d_web_cam.py**  
+  - Captures live webcam feed using OpenCV.  
+  - Uses MediaPipe Pose to detect body landmarks.  
+  - Draws 2D skeleton overlay on each frame.  
+  - Displays processed feed in real-time at 960x540 resolution with FPS counter.  
+
+- **pose_detection_2d.py**  
   - Reads a video file using OpenCV.  
   - Uses MediaPipe Pose to detect body landmarks.  
-  - Draws a 2D skeleton overlay on each video frame.  
-  - Displays the processed video in real-time.  
+  - Draws 2D skeleton overlay on each video frame.  
+  - Displays processed video in real-time at 484x692 resolution.  
 
-- **pose_3d_visualization.py**  
-  - Runs pose detection on video frames.  
-  - Extracts 3D landmark coordinates (x, y, z).  
-  - Renders a real-time 3D skeleton using Matplotlib.  
-  - Simultaneously displays the original video via OpenCV.  
+- **pose_detection_3d.py**  
+  - Reads a video file using OpenCV.  
+  - Extracts 3D landmark coordinates (x, y, z) using MediaPipe Pose.  
+  - Renders real-time 3D skeleton using Matplotlib with front-view perspective.  
+  - Simultaneously displays the original video at 484x692 resolution with FPS counter.  
 
 - **requirements.txt**  
   - Lists dependencies: `opencv-python`, `mediapipe`, `matplotlib`, `numpy`.  
 
 ## Approach and Architecture
 1. **Input Handling**
-   - Load a video file with OpenCV.
+   - Load video file or webcam feed with OpenCV.
    - Process frame by frame in a loop.
 
 2. **Pose Detection**
@@ -80,34 +87,39 @@ mediapipe-pose-visualizer/
    - Use indices to connect joints (shoulders, elbows, knees, etc.).
 
 4. **Visualization**
-   - **2D Mode**: Overlay skeleton on video frames using OpenCV drawing utilities.  
+   - **2D Mode**: Overlay skeleton on webcam or video frames using OpenCV drawing utilities.  
    - **3D Mode**: Plot landmarks and connections in Matplotlib with real-time updates.  
 
 5. **Output**
-   - Real-time display of processed video (2D).  
+   - Real-time display of processed webcam or video feed (2D).  
    - Interactive 3D skeleton visualization (3D).  
 
 ## Key Features
-- ✅ Real-time human pose estimation from video.  
-- ✅ 2D skeleton overlay directly on video frames.  
+- ✅ Real-time human pose estimation from webcam or video.  
+- ✅ 2D skeleton overlay on webcam or video frames.  
 - ✅ Interactive 3D skeleton visualization with depth information.  
-- ✅ Works with any video file input.  
+- ✅ Works with webcam or any video file input.  
 - ✅ Easy to extend for tracking, motion analysis, or angle measurement.  
 
 ## Usage Instructions
 
-### Run 2D Pose Overlay
+### Run 2D Pose Overlay (Webcam)
 ```bash
-python pose_video_overlay.py
+python 2d_web_cam.py
+```
+
+### Run 2D Pose Overlay (Video)
+```bash
+python pose_detection_2d.py
 ```
 
 ### Run 3D Pose Visualization
 ```bash
-python pose_3d_visualization.py
+python pose_detection_3d.py
 ```
 
-- Replace `video.mp4` in the scripts with your own video file path.  
-- Press **ESC** to exit early.  
+- Replace `video.mp4` in `pose_detection_2d.py` and `pose_detection_3d.py` with your own video file path.  
+- Press **ESC** or **q** to exit early.  
 
 ## Technical Details
 - **Dependencies**:
