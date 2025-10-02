@@ -1,13 +1,13 @@
 import cv2
 import mediapipe as mp
-import os 
+import os
 
 mp_pose = mp.solutions.pose
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 
 # Replace with your image file path
-image_path = "image_mpii2.jpeg"  # Use any image file
+image_path = "Pose-Visualizer-MediaPipe/football.jpeg"  # Use any image file
 
 image = cv2.imread(image_path)
 
@@ -35,11 +35,19 @@ rgb_image.flags.writeable = True
 
 # Draw landmarks if detected
 if results.pose_landmarks:
+    landmark_drawing_spec = mp_drawing.DrawingSpec(
+        color=(0, 255, 0), thickness=2, circle_radius=3
+    )  # Green dots
+    connection_drawing_spec = mp_drawing.DrawingSpec(
+        color=(0, 0, 255), thickness=2
+    )  # Red lines
+
     mp_drawing.draw_landmarks(
         image,
         results.pose_landmarks,
         mp_pose.POSE_CONNECTIONS,
-        landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style(),
+        landmark_drawing_spec=landmark_drawing_spec,
+        connection_drawing_spec=connection_drawing_spec,
     )
 
     # Generate output filename from input
