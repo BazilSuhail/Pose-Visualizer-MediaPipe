@@ -35,20 +35,17 @@ rgb_image.flags.writeable = True
 
 # Draw landmarks if detected
 if results.pose_landmarks:
-    landmark_drawing_spec = mp_drawing.DrawingSpec(
-        color=(0, 255, 0), thickness=2, circle_radius=3
-    )  # Green dots
-    connection_drawing_spec = mp_drawing.DrawingSpec(
-        color=(0, 0, 255), thickness=2
-    )  # Red lines
-
+    landmark_drawing_spec = mp_drawing.DrawingSpec(color=(255, 255, 0), thickness=4, circle_radius=5)  # Cyan dots, bigger radius
+    connection_drawing_spec = mp_drawing.DrawingSpec(color=(255, 255, 0), thickness=4)               # Cyan thick lines
+    
     mp_drawing.draw_landmarks(
         image,
         results.pose_landmarks,
         mp_pose.POSE_CONNECTIONS,
         landmark_drawing_spec=landmark_drawing_spec,
-        connection_drawing_spec=connection_drawing_spec,
+        connection_drawing_spec=connection_drawing_spec
     )
+
 
     # Generate output filename from input
     base_name = os.path.splitext(os.path.basename(image_path))[0]  # e.g., 'babar'
