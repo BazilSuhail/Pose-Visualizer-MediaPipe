@@ -7,7 +7,7 @@ mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 
 # Replace with your image file path
-image_path = "Pose-Visualizer-MediaPipe/image_mpii2.jpeg"  # Use any image file
+image_path = "image_mpii2.jpeg"  # Use any image file
 
 image = cv2.imread(image_path)
 
